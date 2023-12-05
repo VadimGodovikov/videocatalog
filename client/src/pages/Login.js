@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {Container, Form, Button} from 'react-bootstrap'
 import Card from "react-bootstrap/Card"
-import { NavLink } from 'react-router-dom';
-import { REGISTRATION_ROUTE } from '../utils/consts';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { MAIN_ROUTE, REGISTRATION_ROUTE } from '../utils/consts';
 import { login } from '../http/userAPI'
+import { Context } from '..';
 
 const Login = () => {
+    const {user} = useContext(Context)
+    const navigate = useNavigate();
     const [Login, setLogin] = useState('')
     const [Password, setPassword] = useState('')
 
     const click = async () => {
-        const response = await login();
-        console.log(response)
+        try {
+            let data;
+
+            data = await login(Login, Password);
+            user.setUser(user)
+            user.setIsAuth(true)
+            navigate(MAIN_ROUTE)
+        } catch (e) {
+            alert(e.response.data.message)
+        }
     }
 
     return (

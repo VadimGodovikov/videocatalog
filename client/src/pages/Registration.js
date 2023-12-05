@@ -1,23 +1,34 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {Container, Form, Button} from 'react-bootstrap'
 import Card from "react-bootstrap/Card"
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTE } from '../utils/consts';
 import { registration } from '../http/userAPI';
+import { Context } from '..';
 
 const Registration = () => {
+    const {user} = useContext(Context)
+    const navigate = useNavigate()
     const [Login, setLogin] = useState('')
     const [Password, setPassword] = useState('')
     const [Email, setEmail] = useState('')
     const [Birthday, setBirthday] = useState('')
     
     const click = async () => {
-        const response = await registration();
         console.log("Login:", Login);
         console.log("Password:", Password);
         console.log("Email:", Email);
         console.log("Birthday:", Birthday);
-        console.log(response)
+
+        try{
+            let data;
+
+            data = await registration(Login, Password, Email, Birthday);
+            user.setUser(user)
+            navigate(LOGIN_ROUTE)
+        }catch(e) {
+            alert(e.response.data.message)
+        }
     }
 
     const formatBirthday = (value) => {
