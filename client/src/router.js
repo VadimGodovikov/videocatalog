@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import Auth  from "./pages/Auth";
+import Login from "./pages/Login";
+import Registration from "./pages/Registration";
 import Main from "./pages/Main";
 import Movie from "./pages/Movie"
 import Library from "./pages/Library";
@@ -9,11 +10,11 @@ import { LIBRARY_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, MOVIE_ROUTE, PROFILE_ROUTE, REG
 const router = createBrowserRouter([
  {
     path: LOGIN_ROUTE,
-    element: <Auth/>
+    element: <Login/>
  },
  {
     path: REGISTRATION_ROUTE,
-    element: <Auth/>
+    element: <Registration/>
  },
  {
     path: MOVIE_ROUTE,
