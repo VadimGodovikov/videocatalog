@@ -43,6 +43,15 @@ class UserController {
         const token = generateJwt(req.user.ID_Usera, req.user.Login)
         return res.json({token})
     }
+    async getProfile(req,res){
+        const {Login, Birthday, Email} = req.user
+        return res.json({
+            Login: Login,
+            Birthday: Birthday,
+            Email: Email,
+        });
+        
+    }
 }
 
 module.exports = new UserController()
