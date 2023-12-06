@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTE } from '../utils/consts';
 import { registration } from '../http/userAPI';
 import { Context } from '..';
+import '../style/Login.css'
 
 const Registration = () => {
     const {user} = useContext(Context)
@@ -25,8 +26,9 @@ const Registration = () => {
 
             data = await registration(Login, Password, Email, Birthday);
             user.setUser(user)
+            user.setIsAuth(false)
             navigate(LOGIN_ROUTE)
-        }catch(e) {
+        } catch (e) {
             alert(e.response.data.message)
         }
     }

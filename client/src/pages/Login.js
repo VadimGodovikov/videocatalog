@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { MAIN_ROUTE, REGISTRATION_ROUTE } from '../utils/consts';
 import { login } from '../http/userAPI'
 import { Context } from '..';
+import '../style/Login.css'
 
 const Login = () => {
     const {user} = useContext(Context)
@@ -15,7 +16,7 @@ const Login = () => {
     const click = async () => {
         try {
             let data;
-
+            
             data = await login(Login, Password);
             user.setUser(user)
             user.setIsAuth(true)
