@@ -88,11 +88,12 @@ const Registration = () => {
                             value={Email}
                             onChange={e => setEmail(e.target.value)}
                         />
+                        <h2 style={{marginTop: 10, marginBottom: 0, marginLeft: 0, fontSize: 16}}>Дата рождения</h2>
                         <Form.Control
                             size='lg'
                             type='date'
                             className="mt-3"
-                            placeholder="Введите вашу дату рождения (19-09-1999)..."
+                            placeholder="Введите вашу дату рождения..."
                             value={Birthday}
                             onChange={handleBirthdayChange}
                         />
