@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom';
+import { Context } from '..';
+import { LOGIN_ROUTE } from '../utils/consts';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -9,7 +11,15 @@ import '../style/MainLayout.css'
 
 
 function MainLayout() {
-    const navigate = useNavigate();
+    const {user} = useContext(Context)
+    const navigate = useNavigate()
+    useEffect(() => {
+        console.log(user.isAuth)
+        if(!user.isAuth){
+            navigate(LOGIN_ROUTE)
+        }
+      }, [user.isAuth]);
+
     const profileClick = async () => {
         navigate(PROFILE_ROUTE)
     }
@@ -21,10 +31,10 @@ function MainLayout() {
     }
     return (
         <>
-            <div class="header" style={{ marginLeft: 30, marginRight: 30 }}>
+            <div class="header">
                 <Navbar style={{ backgroundColor: '#FF847C', borderRadius: 10, paddingTop: 15, paddingBottom: 15, paddingLeft: 5, paddingRight: 5 }}>
                     <Container style={{ padding: 0 }}>
-                        <Navbar.Brand href="/" style={{ color: 'white' }}>ЛОГОТИП</Navbar.Brand>
+                        <Navbar.Brand onClick={() => mainClick()} style={{ color: 'white' }}>ЛОГОТИП</Navbar.Brand>
                         <Nav className="justify-contend-end">
                             <div onClick={profileClick} class="cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
@@ -46,7 +56,7 @@ function MainLayout() {
             </div>
             <div class="sidebar">
                 <nav class="sidebar-nav">
-                    <div onClick={mainClick} class='main-div cursor-pointer'>
+                    <div onClick={() => mainClick()} class='main-div cursor-pointer'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none" class="svg-sidebar">
                             <path d="M10.8569 4.75H6.78617C5.66162 4.75 4.75 5.66162 4.75 6.78617V10.8569C4.75 11.9815 5.66162 12.8931 6.78617 12.8931H10.8569C11.9815 12.8931 12.8931 11.9815 12.8931 10.8569V6.78617C12.8931 5.66162 11.9815 4.75 10.8569 4.75Z" fill="black" />
                             <path d="M10.8569 14.9293H6.78617C5.66162 14.9293 4.75 15.8409 4.75 16.9654V21.0362C4.75 22.1607 5.66162 23.0723 6.78617 23.0723H10.8569C11.9815 23.0723 12.8931 22.1607 12.8931 21.0362V16.9654C12.8931 15.8409 11.9815 14.9293 10.8569 14.9293Z" fill="black" />
@@ -60,7 +70,7 @@ function MainLayout() {
                         </svg>
                         <h2>Главная</h2>
                     </div>
-                    <div onClick={libraryClick} class='main-div cursor-pointer'>
+                    <div onClick={() => libraryClick()} class='main-div cursor-pointer'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none" class="svg-sidebar">
                             <path d="M7.91663 11.0833H30.0833M7.91663 19H30.0833M7.91663 26.9167H30.0833" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
@@ -69,8 +79,10 @@ function MainLayout() {
                 </nav>
             </div>
 
-            <div class='containers'>
-                <Outlet/>
+            <div class="main">
+                <div class='containers'>
+                    <Outlet />
+                </div>
             </div>
         </>
 

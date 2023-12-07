@@ -2,7 +2,7 @@ import {makeAutoObservable} from "mobx"
 
 export default class UserMovie {
     constructor() {
-        this._isAuth = false
+        //this._isAuth = false
         this._user = {}
         makeAutoObservable(this)
     }
@@ -15,7 +15,7 @@ export default class UserMovie {
     }
 
     get isAuth() {
-        return this._isAuth
+        return localStorage.getItem('token');
     }
     get user(){
         return this._user

@@ -18,7 +18,9 @@ const Login = () => {
             let data;
             
             data = await login(Login, Password);
-            user.setUser(user)
+            console.log(data);
+            user.setUser(data)
+            console.log(user.user);
             user.setIsAuth(true)
             navigate(MAIN_ROUTE)
         } catch (e) {
