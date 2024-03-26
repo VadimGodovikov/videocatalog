@@ -26,7 +26,6 @@ const Registration = () => {
 
             data = await registration(Login, Password, Email, Birthday);
             user.setUser(user)
-            user.setIsAuth(false)
             navigate(LOGIN_ROUTE)
         } catch (e) {
             alert(e.response.data.message)

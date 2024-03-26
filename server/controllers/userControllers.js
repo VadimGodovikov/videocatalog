@@ -2,6 +2,7 @@ const {User} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { where } = require('sequelize')
 
 const generateJwt = (ID_Usera, Login) => {
     return jwt.sign(
@@ -43,15 +44,29 @@ class UserController {
         const token = generateJwt(req.user.ID_Usera, req.user.Login)
         return res.json({token})
     }
-    async getProfile(req,res){
-        const {Login, Birthday, Email} = req.user
-        return res.json({
-            Login: Login,
-            Birthday: Birthday,
-            Email: Email,
-        });
-        
+    async getProfile(req, res){
+        try {
+            const token = req.headers.authorization.split(' ')[1]; // Получаем токен из заголовка запроса
+            const decoded = jwt.verify(token, process.env.SECRET_KEY); // Декодируем токен
+    
+            const user = await User.findOne({where: {ID_Usera: decoded.ID_Usera}});
+            if (!user) {
+                return res.status(404).json({ error: 'Пользователь не найден' });
+            }
+    
+            user.Login = req.body.Login || user.Login;
+            user.Email = req.body.Email || user.Email;
+            user.Birthday = req.body.Birthday || user.Birthday;
+            
+            return res.json({
+                user
+            });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: 'Произошла ошибка при получении профиля пользователя' });
+        }
     }
+    
 }
 
 module.exports = new UserController()
