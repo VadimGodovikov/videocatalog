@@ -59,7 +59,9 @@ class UserController {
             user.Birthday = req.body.Birthday || user.Birthday;
             
             return res.json({
-                user
+                Login: user.Login,
+                Email: user.Email,
+                Birthday: user.Birthday
             });
         } catch (error) {
             console.error(error);
