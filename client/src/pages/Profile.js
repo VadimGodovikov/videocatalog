@@ -22,11 +22,6 @@ const Profile = () => {
         }
     });
     setUserData(response.data);
-
-    console.log(userData.Login);
-    console.log(userData.Email);
-    console.log(userData.Birthday);
-
 };
 
     const logout = async () => {
