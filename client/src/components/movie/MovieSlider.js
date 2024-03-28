@@ -9,12 +9,12 @@ const MovieSlider = ({ genre }) => {
     useEffect(() => {
         const fetchMovies = async () => {
           try {
-            const moviesData = await axios.get(`https://api.kinopoisk.dev/v1.4/movies?genres.name=${genre}`, {
+            const moviesData = await axios.get(`https://api.kinopoisk.dev/v1.4/movie?genres.name=${genre}`, {
               headers: {
                 'X-API-KEY': '6BPY2WX-2RMM7RA-NZW601H-8CC689V'
               }
             });
-            setMovies(moviesData);
+            setMovies(moviesData.data.docs);
           } catch (error) {
             console.error(error);
           }
@@ -31,18 +31,15 @@ const MovieSlider = ({ genre }) => {
         slideToScroll: 3
       };
 
-      if(!movies)
-      { return null }
-    return (
+      return (
         <div className="movie-slider">
             <h2>{genre}</h2>
             <Slider {...setting}>
-            {movies.map(movie => (
-                <MovieCard key={movie.id} movie={movie}/>
-            ))}
+            {!movies.data ? (movies.map(movie => <MovieCard key={movie.id} movie={movie}/>)) : (<h1>Загрузка</h1>)}
             </Slider>
         </div>
-    );
+      );
+      
 };
 
 export default MovieSlider;
