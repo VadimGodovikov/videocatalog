@@ -31,14 +31,22 @@ const MovieSlider = ({ genre }) => {
         slideToScroll: 3
       };
 
-      return (
-        <div className="movie-slider">
-            <h2>{genre}</h2>
-            <Slider {...setting}>
-            {!movies.data ? (movies.map(movie => <MovieCard key={movie.id} movie={movie}/>)) : (<h1>Загрузка</h1>)}
-            </Slider>
-        </div>
-      );
+      console.log(movies);
+      
+      if(!movies) {
+        return (<h1>Загрузка</h1>);
+      }
+      else{
+        return (
+          <div className="movie-slider">
+              <h2>{genre}</h2>
+              <Slider {...setting}>
+              {movies.map(movie => <MovieCard key={movie.id} movie={movie}/>)}
+              </Slider>
+          </div>
+        );
+      }
+      
       
 };
 

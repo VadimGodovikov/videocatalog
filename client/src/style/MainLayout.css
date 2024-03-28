@@ -3,6 +3,7 @@ body {
 }
 
 .header {
+    z-index: 999999;
     position: fixed;
     width: 100%;
     padding: 0 30px;
@@ -19,6 +20,7 @@ body {
 }
 
 .sidebar {
+    z-index: 999999;
     position: fixed;
     margin-top: 90px;
     margin-left: 30px;
