@@ -1,4 +1,5 @@
 import React from "react";
+import './MovieCard-CSS.css';
 
 const MovieCard = ({ movie }) => {
     console.log(movie);

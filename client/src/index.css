@@ -1,4 +1,5 @@
 body {
+  max-width: 100%;
   background-color: #2A363B;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

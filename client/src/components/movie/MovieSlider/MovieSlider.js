@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Slider from 'react-slick';
-import MovieCard from "./MovieCard";
+import { Carousel, CarouselItem, Stack, Card } from "react-bootstrap";
+import MovieCard from "../MovieCard/MovieCard";
+import './MovieSlider-CSS.css'
 
 const MovieSlider = ({ genre }) => {
     const [movies, setMovies] = useState([]);
@@ -23,26 +24,26 @@ const MovieSlider = ({ genre }) => {
         fetchMovies();
       }, [genre]);
 
-      const setting = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 4,
-        slideToScroll: 3
-      };
-
-      console.log(movies);
-      
       if(!movies) {
         return (<h1>Загрузка</h1>);
       }
       else{
         return (
           <div className="movie-slider">
-              <h2>{genre}</h2>
-              <Slider {...setting}>
-              {movies.map(movie => <MovieCard key={movie.id} movie={movie}/>)}
-              </Slider>
+            <h2 className="genre-title">{genre}</h2>
+            <Carousel interval={5000} indicators={true} style={{ height: 300 }}>
+              {[...Array(Math.ceil(movies.length / 5))].map((_, index) => (
+                <CarouselItem key={index}>
+                  <Stack direction="horizontal" className="h-100 justify-content-center align-items-center" gap={5}>
+                    {movies.slice(index * 5, (index + 1) * 5).map(movie => (
+                      <Card key={movie.id}>
+                        <MovieCard movie={movie}/>
+                      </Card>
+                    ))}
+                  </Stack>
+                </CarouselItem>
+              ))}
+            </Carousel>
           </div>
         );
       }

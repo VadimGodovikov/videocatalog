@@ -1,6 +1,5 @@
 import React from 'react';
-import MovieSlider from '../components/movie/MovieSlider';
-
+import MovieSlider from '../components/movie/MovieSlider/MovieSlider';
 const Main = () => {
     const genres = ['боевик'/*, 'ужасы', 'драма'*/];
     return (
