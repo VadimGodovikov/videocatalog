@@ -31,10 +31,10 @@ const MovieSlider = ({ genre }) => {
         return (
           <div className="movie-slider">
             <h2 className="genre-title">{genre}</h2>
-            <Carousel interval={5000} indicators={true} style={{ height: 300 }}>
+            <Carousel interval={5000} indicators={false} style={{ height: 300 }}>
               {[...Array(Math.ceil(movies.length / 5))].map((_, index) => (
                 <CarouselItem key={index}>
-                  <Stack direction="horizontal" className="h-100 justify-content-center align-items-center" gap={5}>
+                  <Stack direction="horizontal" className="h-100 justify-content-center align-items-center" gap={3}>
                     {movies.slice(index * 5, (index + 1) * 5).map(movie => (
                       <Card key={movie.id}>
                         <MovieCard movie={movie}/>
