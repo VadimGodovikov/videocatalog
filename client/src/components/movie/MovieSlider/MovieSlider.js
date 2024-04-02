@@ -3,6 +3,7 @@ import axios from "axios";
 import { Carousel, CarouselItem, Stack, Card } from "react-bootstrap";
 import MovieCard from "../MovieCard/MovieCard";
 import './MovieSlider-CSS.css'
+import { API_KEY, API_URL } from "../../../utils/consts";
 
 const MovieSlider = ({ genre }) => {
     const [movies, setMovies] = useState([]);
@@ -10,12 +11,13 @@ const MovieSlider = ({ genre }) => {
     useEffect(() => {
         const fetchMovies = async () => {
           try {
-            const moviesData = await axios.get(`https://api.kinopoisk.dev/v1.4/movie?genres.name=${genre}&year=2024`, {
+            const moviesData = await axios.get(`${API_URL}/movie?genres.name=${genre}&year=2024&limit=250`, {
               headers: {
-                'X-API-KEY': 'CWGJ2C8-VGZM3FC-N2T2ENY-1S0QMWS'
+                'X-API-KEY': API_KEY
               }
             });
             setMovies(moviesData.data.docs);
+            
           } catch (error) {
             console.error(error);
           }

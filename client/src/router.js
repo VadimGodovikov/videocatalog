@@ -5,8 +5,9 @@ import Main from "./pages/Main";
 import Movie from "./pages/Movie"
 import Library from "./pages/Library";
 import Profile from "./pages/Profile";
+import Person from "./pages/Person";
 import MainLayout from "./components/MainLayout";
-import { LIBRARY_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, MOVIE_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE } from "./utils/consts";
+import { LIBRARY_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, MOVIE_ROUTE, PERSON_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE } from "./utils/consts";
 
 const router = createBrowserRouter([
  {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: PROFILE_ROUTE,
         element: <Profile />
+      },
+      {
+        path: PERSON_ROUTE,
+        element: <Person/>
       }
    ]
  },

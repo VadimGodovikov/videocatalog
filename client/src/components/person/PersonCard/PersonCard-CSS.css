@@ -1,4 +1,4 @@
-.movie-card {
+.person-card {
     height: 100%;
     max-width: 190px;
     width: 100%;
@@ -6,11 +6,11 @@
     border: 0px solid black;
 }
 
-.movie-card:hover {
+.person-card:hover {
     cursor: pointer;
 }
 
-.img-movie {
+.person-img {
     margin-top: 10px;
     width: 100%;
     height: 260px;
@@ -18,26 +18,28 @@
     border-radius: 10px;
     transition: 0.3s;
 }
-.img-movie:hover{
+
+.person-img:hover {
     box-shadow: 0px 3px 14px 0px #FECEA8;
     transition: 0.3s;
 }
 
-
-.movie-card .name-movie {
+.person-card .person-inicial {
     width: 100%;
     display: block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    text-align: left;
+    text-align: center;
     margin-top: 6px;
     color: white;
     font-size: 16px;
     font-weight: 400;
 }
 
-.movie-card .options-movie {
+.person-card .person-profession {
+    margin-top: -10px;
+    text-align: center;
     color: white;
     font-size: 12px;
 }

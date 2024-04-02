@@ -1,0 +1,11 @@
+.persons-slider {
+    margin-top: 60px;
+}
+
+.persons-title {
+    margin-bottom: 30px;
+    margin-left: 80px;
+    text-transform: capitalize;
+    font-size: 24px;
+    font-weight: bold;
+}
