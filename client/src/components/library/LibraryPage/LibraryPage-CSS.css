@@ -1,0 +1,23 @@
+.library-info {
+    display: flex;
+}
+
+.library-title {
+    margin-right: 50px;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.library-sort {
+    margin-top: 25px;
+}
+
+.sort-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.sort-menu {
+    margin-left: 20px;
+    color: #FECEA8;
+}

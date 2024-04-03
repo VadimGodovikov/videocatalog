@@ -1,0 +1,12 @@
+.carousel-control {
+    padding: 0;
+    margin: 0;
+}
+
+.carousel-control-prev {
+    left: -5%;
+}
+.carousel-control-next {
+    
+    right: -5%;
+}

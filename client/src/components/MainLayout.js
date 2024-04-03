@@ -7,18 +7,18 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { LIBRARY_ROUTE, MAIN_ROUTE, PROFILE_ROUTE } from '../utils/consts';
 import '../style/MainLayout.css'
+import '../style/CarouselCSS.css'
 
 
 
 function MainLayout() {
-    const {user} = useContext(Context)
+    const { user } = useContext(Context)
     const navigate = useNavigate()
     useEffect(() => {
-        console.log(user.isAuth)
-        if(!user.isAuth){
+        if (!user.isAuth) {
             navigate(LOGIN_ROUTE)
         }
-      }, [user.isAuth]);
+    }, [user.isAuth]);
 
     const profileClick = async () => {
         navigate(PROFILE_ROUTE)
@@ -68,13 +68,13 @@ function MainLayout() {
                             <path d="M31.2139 14.9293H27.1431C26.0186 14.9293 25.1069 15.8409 25.1069 16.9654V21.0362C25.1069 22.1607 26.0186 23.0723 27.1431 23.0723H31.2139C32.3384 23.0723 33.25 22.1607 33.25 21.0362V16.9654C33.25 15.8409 32.3384 14.9293 31.2139 14.9293Z" fill="black" />
                             <path d="M31.2139 25.1069H27.1431C26.0186 25.1069 25.1069 26.0185 25.1069 27.1431V31.2138C25.1069 32.3384 26.0186 33.25 27.1431 33.25H31.2139C32.3384 33.25 33.25 32.3384 33.25 31.2138V27.1431C33.25 26.0185 32.3384 25.1069 31.2139 25.1069Z" fill="black" />
                         </svg>
-                        <h2>Главная</h2>
+                        <h2 class="nav-title">Главная</h2>
                     </div>
                     <div onClick={() => libraryClick()} class='main-div cursor-pointer'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none" class="svg-sidebar">
                             <path d="M7.91663 11.0833H30.0833M7.91663 19H30.0833M7.91663 26.9167H30.0833" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        <h2>Библиотека</h2>
+                        <h2 class="nav-title">Библиотека</h2>
                     </div>
                 </nav>
             </div>

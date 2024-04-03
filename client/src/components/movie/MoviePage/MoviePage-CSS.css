@@ -1,0 +1,65 @@
+.movie-info{
+    display: flex;
+}
+
+.movie-img {
+    width: 20%;
+    border-radius: 10px;
+}
+
+.movie-options {
+    width: 40%;
+    margin-left: 25px;
+}
+
+.movie-name {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.movie-reit {
+    margin-top: -10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.movie-title-description {
+    margin-top: -10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.movie-description {
+    margin-top: -10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.movie-country {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.movie-zhanr {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.movie-year {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.movie-ott {
+    font-size: 16px;
+    font-weight: 500;
+    color: #FECEA8;
+}
+
+.movie-person {
+    margin-top: 25px;
+}
+
+.movie-similar {
+    margin-top: 25px;
+}

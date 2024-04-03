@@ -42,10 +42,10 @@
     border-radius: 10px;
 }
 
-h2 {
+.nav-title {
     margin-left: 20px;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .main {
@@ -57,5 +57,5 @@ h2 {
 }
 
 .containers {
-    max-width: 1440px;;
+    max-width: 1440px;
 }

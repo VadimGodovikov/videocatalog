@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { API_URL, API_KEY } from "../../../utils/consts";
 import PersonMovieSlider from "../PersonMovieSldier/PersonMovieSlider";
 import shablonphoto from '../../img/shablonphoto.png'
+import './PersonPage-CSS.css'
 
 const PersonPage = () => {
 
@@ -46,24 +47,24 @@ const PersonPage = () => {
                 <img class="person-photo" src={person.photo || shablonphoto} alt={person.name || person.enName} />
                 <div class="person-options">
                     <p class="person-name">{person.name || person.enName}</p>
-                    <p class="person-options-info">Карьера:&emsp;{person?.profession?.map((prof, index) => (
+                    <p class="person-options-info">Карьера: <span class="person-ott">{person?.profession?.map((prof, index) => (
                         <span key={prof.value}>
                             {prof.value}
                             {index !== person.profession.length - 1 && <>,&nbsp;&nbsp;</>}
                         </span>
-                    ))}</p>
-                    <p class="person-options-info">Дата рождения:&emsp;{new Date(person.birthday).toLocaleDateString()}</p>
-                    <p class="person-options-info">Место рождения:&emsp;{person?.birthPlace?.map((b, index) => (
+                    ))}</span></p>
+                    <p class="person-options-info">Дата рождения: <span class="person-ott">{new Date(person.birthday).toLocaleDateString()}</span></p>
+                    <p class="person-options-info">Место рождения: <span class="person-ott">{person?.birthPlace?.map((b, index) => (
                         <span key={b.value}>
                             {b.value}
                             {index !== person.birthPlace.length - 1 && <>,&nbsp;&nbsp;</>}
                         </span>
-                    ))}</p>
-                    <p class="person-options-info">Всего фильмов:&emsp;{person.movies.length}</p>
+                    ))}</span></p>
+                    <p class="person-options-info">Всего фильмов: <span class="person-ott">{person.movies.length}</span></p>
                 </div>
             </div>
-            <div class="person-movie-sldier">
-                <h2>Фильмы персоны</h2>
+            <div class="person-movie-slider">
+                <h2 class="person-movie-slider-title">Фильмы персоны</h2>
                 <PersonMovieSlider personMovies={personMovies} key={personId} />
             </div>
         </div>

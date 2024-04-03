@@ -1,9 +1,10 @@
 import React from 'react';
+import LibraryPage from '../components/library/LibraryPage/LibraryPage';
 
 const Library = () => {
     return (
-        <div>
-            Library
+        <div className='library-conteiner'>
+            <LibraryPage/>
         </div>
     )
 }

@@ -6,7 +6,7 @@ import './PersonSlider-CSS.css'
 const PersonSlider = ({ persons }) => {
     return (
         <div className="persons-slider">
-            <h2 className="persons-title">Актёры и режиссёры</h2>
+            <h2 class="persons-title">Актёры и режиссёры</h2>
             <Carousel interval={5000} indicators={false}>
                 {[...Array(Math.ceil(persons.length / 5))].map((_, index) => (
                     <CarouselItem key={index}>

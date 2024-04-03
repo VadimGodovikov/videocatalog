@@ -1,6 +1,7 @@
 import React from "react";
 import { Carousel, CarouselItem, Stack, Card } from "react-bootstrap";
 import MovieCard from "../MovieCard/MovieCard";
+import './SimilarMovieSlider-CSS.css'
 
 const SimilarMovieSlider = ({ simMovie }) => {
     if(simMovie.length === 0){
@@ -8,7 +9,7 @@ const SimilarMovieSlider = ({ simMovie }) => {
     }
     return(
         <div className="movie-slider">
-            <h2>Похожие фильмы:</h2>
+            <h2 class="similar-title">Похожие фильмы:</h2>
             <Carousel interval={5000} indicators={false}>
               {[...Array(Math.ceil(simMovie.length / 5))].map((_, index) => (
                 <CarouselItem key={index}>

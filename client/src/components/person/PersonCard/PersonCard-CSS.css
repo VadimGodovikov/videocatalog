@@ -24,7 +24,7 @@
     transition: 0.3s;
 }
 
-.person-card .person-inicial {
+.person-inicial {
     width: 100%;
     display: block;
     overflow: hidden;
@@ -34,12 +34,14 @@
     margin-top: 6px;
     color: white;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 600;
 }
 
-.person-card .person-profession {
+.person-profession {
     margin-top: -10px;
     text-align: center;
     color: white;
     font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
 }
