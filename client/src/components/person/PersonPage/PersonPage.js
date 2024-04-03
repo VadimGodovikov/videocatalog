@@ -3,11 +3,13 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { API_URL, API_KEY } from "../../../utils/consts";
 import PersonMovieSlider from "../PersonMovieSldier/PersonMovieSlider";
+import shablonphoto from '../../img/shablonphoto.png'
 
 const PersonPage = () => {
 
     const { personId } = useParams();
     const [person, setPersonData] = useState(null);
+    const [personMovies, setPersonMovies] = useState([]);
 
     useEffect(() => {
         const fetchPerson = async () => {
@@ -17,7 +19,13 @@ const PersonPage = () => {
                         'X-API-KEY': API_KEY
                     }
                 });
+                const personMoviesData = await axios.get(`${API_URL}/movie?persons.id=${personId}&page=1&limit=250`, {
+                    headers: {
+                        'X-API-KEY': API_KEY
+                    }
+                });
                 setPersonData(personData.data);
+                setPersonMovies(personMoviesData.data.docs)
             } catch (error) {
                 console.error(error);
             }
@@ -26,8 +34,7 @@ const PersonPage = () => {
     }, [personId]);
 
     console.log(person);
-    const movies = person?.movies || [];
-
+    console.log(personMovies);
     if (!person) {
         return (
             <h1>Загрузка...</h1>
@@ -36,7 +43,7 @@ const PersonPage = () => {
     return (
         <div class="person-component">
             <div class="person-info">
-                <img class="person-img" src={person.photo || 'https://www.holla.nl/wp-content/uploads/2019/09/Nieuwe-medewerker-man.jpg'} alt={person.name || person.enName} />
+                <img class="person-photo" src={person.photo || shablonphoto} alt={person.name || person.enName} />
                 <div class="person-options">
                     <p class="person-name">{person.name || person.enName}</p>
                     <p class="person-options-info">Карьера:&emsp;{person?.profession?.map((prof, index) => (
@@ -56,7 +63,8 @@ const PersonPage = () => {
                 </div>
             </div>
             <div class="person-movie-sldier">
-                <PersonMovieSlider movies={movies} key={personId} />
+                <h2>Фильмы персоны</h2>
+                <PersonMovieSlider personMovies={personMovies} key={personId} />
             </div>
         </div>
     );

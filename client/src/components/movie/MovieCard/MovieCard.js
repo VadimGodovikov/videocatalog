@@ -10,6 +10,9 @@ const MovieCard = ({ movie }) => {
         navigate(`/movie/${movie.id}`);
     };
 
+    if(!movie){
+        return null;
+    }
     return (
         <div className="movie-card" onClick={handleMovieClick}>
             <img class="img-movie" src={movie.poster.url} alt={movie.name || movie.alternativeName}></img>

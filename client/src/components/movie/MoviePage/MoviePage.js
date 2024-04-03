@@ -4,6 +4,7 @@ import axios from "axios";
 import { API_KEY, API_URL } from "../../../utils/consts";
 import { useParams } from "react-router-dom";
 import PersonSlider from "../../person/PersonSlider/PersonSlider";
+import SimilarMovieSlider from "../SimilarMovieSlider/SimilarMovieSlider";
 
 const MoviePage = () => {
 
@@ -18,8 +19,8 @@ const MoviePage = () => {
             'X-API-KEY': API_KEY
           }
         });
-        setMovieData(movieData.data);
 
+        setMovieData(movieData.data);
 
       } catch (error) {
         console.error(error);
@@ -32,9 +33,11 @@ const MoviePage = () => {
   console.log(movie);
   const persons = movie?.persons || [];
   console.log(persons);
+  const simMovie = movie?.similarMovies || [];
+  console.log(simMovie);
 
   if (!movie || !persons) {
-    return <div>Загрузка...</div>;
+    return <h1>Загрузка...</h1>;
   }
 
   return (
@@ -60,6 +63,9 @@ const MoviePage = () => {
       </div>
       <div className="movie-person">
         <PersonSlider persons={persons} key={movieId} />
+      </div>
+      <div>
+        <SimilarMovieSlider simMovie={simMovie} key={movieId}/>
       </div>
     </div>
   );
