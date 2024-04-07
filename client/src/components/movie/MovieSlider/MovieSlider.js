@@ -11,7 +11,7 @@ const MovieSlider = ({ genre }) => {
     useEffect(() => {
         const fetchMovies = async () => {
           try {
-            const moviesData = await axios.get(`${API_URL}/movie?genres.name=${genre}&year=2024&limit=250`, {
+            const moviesData = await axios.get(`${API_URL}/movie?genres.name=${genre}&year=2024&limit=150`, {
               headers: {
                 'X-API-KEY': API_KEY
               }

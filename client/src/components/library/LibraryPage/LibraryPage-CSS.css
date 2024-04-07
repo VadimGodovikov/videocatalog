@@ -21,3 +21,18 @@
     margin-left: 20px;
     color: #FECEA8;
 }
+
+.file-upload {
+    margin-top: 10px;
+    width: 404px;
+    padding: 14px 24px;
+    background-color: #D9D9D9;
+    border-radius: 2000px;
+    color: black;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.button-upload {
+    border-radius: 2000px;
+}
