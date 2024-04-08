@@ -46,7 +46,7 @@ const MoviePage = () => {
         <img class="movie-img" src={movie.poster.url || shablonphoto} alt={movie.name || movie.alternativeName}></img>
         <div className="movie-options">
           <p class="movie-name">{movie.name || movie.alternativeName}</p>
-          <p class="movie-reit">Рейтинг: {movie.rating.kp || movie.rating.imdb || movie.rating.filmCritics} / 10</p>
+          <p class="movie-reit">Рейтинг: {movie?.rating?.kp || movie?.rating?.imdb || movie?.rating?.filmCritics} / 10</p>
           <p class="movie-title-description">Описание фильма</p>
           <p class="movie-description">{movie.description}</p>
           <p className="movie-country">Страна: <span class="movie-ott">{movie?.countries?.map((c, index) => (

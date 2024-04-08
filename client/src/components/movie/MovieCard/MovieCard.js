@@ -11,14 +11,18 @@ const MovieCard = ({ movie }) => {
         navigate(`/movie/${movie.id}`);
     };
 
-    if(!movie){
+    if (!movie) {
         return null;
     }
     return (
         <div className="movie-card" onClick={handleMovieClick}>
             <img class="img-movie" src={movie.poster.url || shablonphoto} alt={movie.name || movie.alternativeName}></img>
             <h3 class="name-movie">{movie.name || movie.alternativeName}</h3>
-            <h4 class="options-movie">{movie.year},  Рейтинг:&#8201; {movie.rating.kp || movie.rating.imdb || movie.rating.filmCritics} / 10</h4>
+            {movie.rating && (
+                <h4 class="options-movie">
+                    {movie.year}, Рейтинг: {movie?.rating?.kp || movie?.rating?.imdb || movie?.rating?.filmCritics} / 10
+                </h4>
+            )}
         </div>
     );
 };
