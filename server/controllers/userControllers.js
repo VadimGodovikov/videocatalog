@@ -8,7 +8,7 @@ const generateJwt = (ID_Usera, Login) => {
     return jwt.sign(
         {ID_Usera, Login},
          process.env.SECRET_KEY,
-        {expiresIn: '24h'})
+        {expiresIn: '24d'})
 }
 
 class UserController {

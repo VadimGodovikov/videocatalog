@@ -12,6 +12,15 @@
     margin-top: 25px;
 }
 
+.library-button {
+    margin-top: -5px;
+    margin-right: 20px;
+}
+
+.library-button:hover {
+    cursor: pointer;
+}
+
 .sort-title {
     font-size: 24px;
     font-weight: bold;
@@ -35,4 +44,22 @@
 
 .button-upload {
     border-radius: 2000px;
+}
+
+.button-info-upload {
+    display: flex;
+    justify-content: center;
+}
+
+.button-info-upload:hover {
+    cursor: pointer;
+}
+
+.button-info-upload h3 {
+    font-size: 14px;
+}
+
+.button-info-upload svg {
+    margin-top: -5px;
+    margin-left: 15px;
 }
