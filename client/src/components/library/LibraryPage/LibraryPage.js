@@ -120,7 +120,7 @@ const LibraryPage = () => {
                             max="2024"
                             step="1"
                             placeholder="Введите год от 1950 до 2024"
-                            style={{ width: 180 }}
+                            style={{ width: 250 }}
                             onChange={(e) => {
                                 let value = parseFloat(e.target.value);
 
@@ -165,13 +165,14 @@ const LibraryPage = () => {
                             <option value="Церемония">Церемония</option>
                         </select>
 
-
-
-                        <select className="sort-menu-items" id="country" onChange={(e) => setFiltrCountry(e.target.value)}>
-                            <option value="">Страна: </option>
-                            <option value="США">США</option>
-                            <option value="Россия">Россия</option>
-                        </select>
+                        <input className="sort-menu-items" type="text" id="country" placeholder="Введите название страны" style={{ width: 220 }} onChange={(e) => {
+                            const value = e.target.value;
+                            if (value === '') {
+                                setFiltrCountry('');
+                            } else {
+                                setFiltrCountry(value);
+                            }
+                        }} />
 
                         <input className="sort-menu-items" type="number" id="rating" min="0" max="10" step="0.1" placeholder="Рейтинг от 0 до 10" style={{ width: 180 }} onChange={(e) => {
                             const value = parseFloat(e.target.value);

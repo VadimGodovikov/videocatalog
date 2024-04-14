@@ -102,7 +102,7 @@ class MovieController {
             include: [{ model: Country }],
             where: {
               nameCountry: {
-                [Op.like]: `%${country}%`
+                [Op.iLike]: `%${country}%`
               }
             }
           },
