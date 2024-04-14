@@ -4,7 +4,6 @@ import shablonphoto from '../../img/shablonphoto.png'
 
 const FilmCard = ({ film }) => {
     const navigate = useNavigate();
-
     const handleMovieClick = () => {
         navigate(`/film/${film.ID_Filma}`);
     };

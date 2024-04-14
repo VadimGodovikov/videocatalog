@@ -11,6 +11,8 @@ const ApiError = require('../error/ApiError')
 
 //const token = "6BPY2WX-2RMM7RA-NZW601H-8CC689V"
 
+const { Op } = require('sequelize');
+
 class MovieController {
   async createPars(req, res, next) {
     try {
@@ -28,7 +30,7 @@ class MovieController {
           Rating,
           Photo
         })
-        
+
         const existingZhanr = await Zhanr.findOne({ where: { nameZhanr } })
         let zhanr
         if (!existingZhanr) {
@@ -81,24 +83,66 @@ class MovieController {
   }
   async getAll(req, res) {
     const userId = req.params.userId;
+    const { name, zhanr, year, rating, country } = req.query;
 
     try {
       const films = await Film.findAll({
-        include: [{ model: Film_Zhanr, include: [{ model: Zhanr }] },
-        { model: Film_Country, include: [{ model: Country }] },
-        { model: Request, where: { ID_Usera: userId } }]
+        include: [
+          {
+            model: Film_Zhanr,
+            include: [{ model: Zhanr }],
+            where: {
+              nameZhanr: {
+                [Op.like]: `%${zhanr}%`
+              }
+            }
+          },
+          {
+            model: Film_Country,
+            include: [{ model: Country }],
+            where: {
+              nameCountry: {
+                [Op.like]: `%${country}%`
+              }
+            }
+          },
+          { model: Request, where: { ID_Usera: userId } }
+        ],
+        where: {
+          Name: {
+            [Op.iLike]: `%${name}%`
+          },
+          ...year && {
+            DataVihoda: year
+          },
+          ...rating && {
+            Rating: {
+              [Op.gte]: rating
+            }
+          }
+        }
       });
       res.json(films);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server error');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Ошибка сервера');
     }
   }
-  async getZhanr(req, res) {
-
-  }
   async getOne(req, res) {
-
+    const filmId = req.params.filmId;
+    try {
+      const film = await Film.findOne({
+        where: { ID_Filma: filmId },
+        include: [
+          { model: Film_Zhanr, include: [{ model: Zhanr }] },
+          { model: Film_Country, include: [{ model: Country }] },
+          { model: Request, include: [{ model: User }] }]
+      });
+      res.json(film);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send('Ошибка сервера');
+    }
   }
 
 }

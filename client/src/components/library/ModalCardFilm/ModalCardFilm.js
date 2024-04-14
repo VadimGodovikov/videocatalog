@@ -1,14 +1,36 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 import './ModalCardFilms-CSS.css'
 import shablonphoto from '../../img/shablonphoto.png'
 
 const ModalCardFilm = ({ movie }) => {
 
-    const navigate = useNavigate();
+    const userId = localStorage.getItem('userId');
 
-    const handleMovieClick = () => {
-        navigate(`/movie/${movie.id}`);
+    const handleMovieClick = async () => {
+        try {
+            const film = await axios.post(`http://localhost:5000/api/movie/upload`, {
+                ID_Filma: movie.id,
+                Name: movie.name || movie.alternativeName,
+                DataVihoda: movie.year,
+                AgeRestriction: movie.ageRating,
+                Description: movie.description,
+                Rating: movie?.rating?.kp || movie?.rating?.imdb || movie?.rating?.filmCritics,
+                Photo: movie.poster.url || shablonphoto,
+                nameZhanr: movie.genres.map(g => g.name).join(', '),
+                nameCountry: movie.countries.map(c => c.name).join(', '),
+                ID_Usera: userId,
+                FilePath: movie?.videos?.trailers[0]
+            });
+    
+            if (film.status === 200) {
+                window.location.reload();
+            } else {
+                console.error('Ошибка при отправке данных на сервер');
+            }
+        } catch (error) {
+            console.error('Произошла ошибка: ', error);
+        }
     };
 
     if (!movie) {

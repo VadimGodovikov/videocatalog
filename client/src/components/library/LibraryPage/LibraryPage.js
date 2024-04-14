@@ -5,7 +5,6 @@ import { Form, Button } from 'react-bootstrap';
 import axios from "axios";
 import { API_KEY, API_URL } from "../../../utils/consts";
 import MovieList from "../../movie/MovieList/MovieList";
-//import { Context } from "../../..";
 import FilmList from "../FilmList/FilmList";
 
 const LibraryPage = () => {
@@ -14,22 +13,29 @@ const LibraryPage = () => {
     const [fileName, setFileName] = useState('');
     const [filmLoaded, setFilmLoaded] = useState(false);
 
-    const handleFileChange = (e) => {
+    // переменные для фильтра:
+    const [filtrName, setFiltrName] = useState('');
+    const [filtrYear, setFiltrYear] = useState('');
+    const [filtrRating, setFiltrRating] = useState('');
+    const [filtrZhanr, setFiltrZhanr] = useState('');
+    const [filtrCountry, setFiltrCountry] = useState('');
+
+    const handleFileChange = (e) => {  // загрузка файла
         const file = e.target.files[0];
 
         if (file.type.startsWith('video/')) {
             setLocalURL(URL.createObjectURL(file));
             setFileName(file.name);
             setFilmLoaded(true);
+            console.log(localURL);
         } else {
             alert('Пожалуйста, загрузите фильм');
             setFilmLoaded(false);
         }
     }
 
-
     const [movies, setMovieData] = useState([]);
-    const handleUpload = () => {
+    const handleUpload = () => {  // кнопка загрузки файла
         if (!filmLoaded) {
             alert('Фильм не загружен');
         } else {
@@ -50,7 +56,6 @@ const LibraryPage = () => {
 
             fetchMovie();
 
-            console.log(localURL);
             console.log(fileName);
             setModalActive(false);
             console.log(movies);
@@ -58,13 +63,14 @@ const LibraryPage = () => {
         }
     }
 
+    localStorage.setItem('localFilmURL', localURL);
     const id = localStorage.getItem('userId');
 
     const [films, setFilmData] = useState([]);
-    useEffect(() => {
+    useEffect(() => {  // парсер с сервера фильмов
         const fetchFilm = async () => {
             try {
-                const filmData = await axios.get(`http://localhost:5000/api/movie/films/${id}`);
+                const filmData = await axios.get(`http://localhost:5000/api/movie/films/${id}?name=${filtrName || ''}&year=${filtrYear || ''}&rating=${filtrRating || ''}&zhanr=${filtrZhanr || ''}&country=${filtrCountry || ''}`);
 
                 setFilmData(filmData.data);
 
@@ -72,9 +78,10 @@ const LibraryPage = () => {
                 console.error(error);
             }
         };
-
         fetchFilm();
-    }, [id]);
+
+    }, [id, filtrName, filtrYear, filtrRating, filtrZhanr, filtrCountry]);
+
 
     const [modalActive, setModalActive] = useState(false);
     const [modalInfoActive, setModalInfoActive] = useState(false);
@@ -103,7 +110,82 @@ const LibraryPage = () => {
                 </div>
             </div>
             <div class='library-sort'>
-                <span class='sort-title'>Сортировать по: <span class='sort-menu'>почему-то</span></span>
+                <span class='sort-title'>Сортировать по: <span class='sort-menu'>
+                    <form>
+                        <input
+                            className="sort-menu-items"
+                            type="number"
+                            id="year"
+                            min="1950"
+                            max="2024"
+                            step="1"
+                            placeholder="Введите год от 1950 до 2024"
+                            style={{ width: 180 }}
+                            onChange={(e) => {
+                                let value = parseFloat(e.target.value);
+
+                                if (value < 1950 || value > 2024 || isNaN(value)) {
+                                    value = '';
+                                }
+
+                                setFiltrYear(value);
+                            }}
+                        />
+
+                        <select className="sort-menu-items" id="genre" onChange={(e) => setFiltrZhanr(e.target.value)}>
+                            <option value="">Жанр: </option>
+                            <option value="аниме">Аниме</option>
+                            <option value="биография">Биография</option>
+                            <option value="боевик">Боевик</option>
+                            <option value="вестерн">Вестерн</option>
+                            <option value="военный">Военный</option>
+                            <option value="детектив">Детектив</option>
+                            <option value="детский">Детские</option>
+                            <option value="документальный">Документальный</option>
+                            <option value="драма">Драма</option>
+                            <option value="Игра">Игра</option>
+                            <option value="исторический">Исторический</option>
+                            <option value="комедия">Комедия</option>
+                            <option value="концерт">Концерт</option>
+                            <option value="короткометражка">Короткометражка</option>
+                            <option value="криминал">Криминал</option>
+                            <option value="мелодрама">Мелодрама</option>
+                            <option value="музыкальный">Музыкальный</option>
+                            <option value="мультфильм">Мультфильм</option>
+                            <option value="мюзикл">Мюзикл</option>
+                            <option value="новости">Новости</option>
+                            <option value="приключения">Приключения</option>
+                            <option value="семейный">Семейный</option>
+                            <option value="спортивный">Спортивное</option>
+                            <option value="триллер">Триллер</option>
+                            <option value="ужасы">Ужасы</option>
+                            <option value="фантастика">Фантастика</option>
+                            <option value="фильм-нуар">Фильмы-нуар</option>
+                            <option value="фэнтэзи">Фэнтэзи</option>
+                            <option value="Церемония">Церемония</option>
+                        </select>
+
+
+
+                        <select className="sort-menu-items" id="country" onChange={(e) => setFiltrCountry(e.target.value)}>
+                            <option value="">Страна: </option>
+                            <option value="США">США</option>
+                            <option value="Россия">Россия</option>
+                        </select>
+
+                        <input className="sort-menu-items" type="number" id="rating" min="0" max="10" step="0.1" placeholder="Рейтинг от 0 до 10" style={{ width: 180 }} onChange={(e) => {
+                            const value = parseFloat(e.target.value);
+                            if (value >= 0 && value <= 10) { setFiltrRating(value); }
+                        }} />
+                    </form>
+                </span></span>
+                <div className="search-menu">
+                    <h3 class="search-title">Поиск по названию фильма</h3>
+                    <input className="sort-menu-items" type="text" id="name" placeholder="Введите название фильма" style={{ width: 250 }} onChange={(e) => {
+                        const searchValue = e.target.value; // Приводим значение к нижнему регистру
+                        setFiltrName(searchValue);
+                    }} />
+                </div>
             </div>
             <div class="library-filmCard" style={{ marginTop: 50 }}>
                 <FilmList films={films} />

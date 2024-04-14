@@ -16,7 +16,7 @@ const MovieCard = ({ movie }) => {
     }
     return (
         <div className="movie-card" onClick={handleMovieClick}>
-            <img class="img-movie" src={movie.poster.url || shablonphoto} alt={movie.name || movie.alternativeName}></img>
+            <img class="img-movie" src={movie?.poster?.url || shablonphoto} alt={movie.name || movie.alternativeName}></img>
             <h3 class="name-movie">{movie.name || movie.alternativeName}</h3>
             {movie.rating && (
                 <h4 class="options-movie">

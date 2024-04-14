@@ -10,6 +10,8 @@
 
 .library-sort {
     margin-top: 25px;
+    display: flex;
+    align-items: center;
 }
 
 .library-button {
@@ -22,11 +24,15 @@
 }
 
 .sort-title {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
     font-size: 24px;
     font-weight: bold;
 }
 
 .sort-menu {
+    display: flex;
     margin-left: 20px;
     color: #FECEA8;
 }
@@ -62,4 +68,36 @@
 .button-info-upload svg {
     margin-top: -5px;
     margin-left: 15px;
+}
+
+.sort-menu-items {
+    margin: 10px;
+    width: 100px;
+    padding: 4px 8px;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    overflow-y: auto;
+}
+
+.sort-menu-items option {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.sort-menu-items:hover {
+    cursor: pointer;
+}
+
+.sort-menu-items option:hover {
+    cursor: pointer;
+}
+
+.search-title {
+    margin-top: -16px;
+    font-size: 16px;
+    margin-bottom: -3px;
+    text-align: center;
 }
