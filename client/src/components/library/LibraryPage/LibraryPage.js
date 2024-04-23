@@ -23,7 +23,7 @@ const LibraryPage = () => {
     const handleFileChange = (e) => {  // загрузка файла
         const file = e.target.files[0];
 
-        if (file.type.startsWith('video/')) {
+        if (file.type.startsWith('video')) {
             setLocalURL(URL.createObjectURL(file));
             setFileName(file.name);
             setFilmLoaded(true);
@@ -57,8 +57,8 @@ const LibraryPage = () => {
             fetchMovie();
 
             console.log(fileName);
+            console.log(localURL);
             setModalActive(false);
-            console.log(movies);
             setModalMovieActive(true);
         }
     }
@@ -183,7 +183,7 @@ const LibraryPage = () => {
                 <div className="search-menu">
                     <h3 class="search-title">Поиск по названию фильма</h3>
                     <input className="sort-menu-items" type="text" id="name" placeholder="Введите название фильма" style={{ width: 250 }} onChange={(e) => {
-                        const searchValue = e.target.value; // Приводим значение к нижнему регистру
+                        const searchValue = e.target.value; // по нижнему регистру
                         setFiltrName(searchValue);
                     }} />
                 </div>

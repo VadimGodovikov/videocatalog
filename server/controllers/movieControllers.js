@@ -9,8 +9,6 @@ const { Request } = require('../models/models')
 const { User } = require('../models/models')
 const ApiError = require('../error/ApiError')
 
-//const token = "6BPY2WX-2RMM7RA-NZW601H-8CC689V"
-
 const { Op } = require('sequelize');
 
 class MovieController {
@@ -18,7 +16,7 @@ class MovieController {
     try {
       const { ID_Usera, FilePath, ID_Filma, Name, DataVihoda, AgeRestriction, Description, Rating, Photo, nameCountry, nameZhanr } = req.body
 
-      // Проверка на существование ID_Filma
+      // проверка на существование фильма
       const existingFilm = await Film.findOne({ where: { ID_Filma } })
       if (!existingFilm) {
         const film = await Film.create({
@@ -130,13 +128,14 @@ class MovieController {
   }
   async getOne(req, res) {
     const filmId = req.params.filmId;
+    const userId = req.params.userId;
     try {
       const film = await Film.findOne({
         where: { ID_Filma: filmId },
         include: [
           { model: Film_Zhanr, include: [{ model: Zhanr }] },
           { model: Film_Country, include: [{ model: Country }] },
-          { model: Request, include: [{ model: User }] }]
+          { model: Request, where: { ID_Usera: userId } }]
       });
       res.json(film);
     } catch (error) {

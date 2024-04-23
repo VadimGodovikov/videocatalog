@@ -4,6 +4,7 @@ export const MOVIE_ROUTE = '/movie/:movieId'
 export const MAIN_ROUTE = '/'
 export const LIBRARY_ROUTE = '/library'
 export const PROFILE_ROUTE = '/profile'
+export const PODBORKI_ROUTE = '/podborki'
 export const PERSON_ROUTE ='/person/:personId'
 export const FILM_ROUTE = '/film/:filmId'
 

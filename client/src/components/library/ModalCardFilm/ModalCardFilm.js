@@ -6,6 +6,7 @@ import shablonphoto from '../../img/shablonphoto.png'
 const ModalCardFilm = ({ movie }) => {
 
     const userId = localStorage.getItem('userId');
+    const localURL = localStorage.getItem('localFilmURL');
 
     const handleMovieClick = async () => {
         try {
@@ -20,7 +21,7 @@ const ModalCardFilm = ({ movie }) => {
                 nameZhanr: movie.genres.map(g => g.name).join(', '),
                 nameCountry: movie.countries.map(c => c.name).join(', '),
                 ID_Usera: userId,
-                FilePath: movie?.videos?.trailers[0]
+                FilePath: localURL
             });
     
             if (film.status === 200) {

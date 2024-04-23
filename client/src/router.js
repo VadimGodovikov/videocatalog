@@ -8,7 +8,8 @@ import Profile from "./pages/Profile";
 import Person from "./pages/Person";
 import Film from "./pages/Film";
 import MainLayout from "./components/MainLayout";
-import { LIBRARY_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, MOVIE_ROUTE, PERSON_ROUTE, FILM_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE } from "./utils/consts";
+import Podborki from "./pages/Podborki";
+import { LIBRARY_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, MOVIE_ROUTE, PERSON_ROUTE, FILM_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE, PODBORKI_ROUTE } from "./utils/consts";
 
 const router = createBrowserRouter([
  {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: PROFILE_ROUTE,
         element: <Profile />
+      },
+      {
+        path: PODBORKI_ROUTE,
+        element: <Podborki />
       },
       {
         path: PERSON_ROUTE,

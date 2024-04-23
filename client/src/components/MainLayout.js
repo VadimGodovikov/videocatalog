@@ -5,29 +5,32 @@ import { LOGIN_ROUTE } from '../utils/consts';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { LIBRARY_ROUTE, MAIN_ROUTE, PROFILE_ROUTE } from '../utils/consts';
+import { LIBRARY_ROUTE, MAIN_ROUTE, PROFILE_ROUTE, PODBORKI_ROUTE } from '../utils/consts';
 import '../style/MainLayout.css'
 import '../style/CarouselCSS.css'
 
 
 
 function MainLayout() {
-    const { user } = useContext(Context)
-    const navigate = useNavigate()
+    const { user } = useContext(Context);
+    const navigate = useNavigate();
     useEffect(() => {
         if (!user.isAuth) {
-            navigate(LOGIN_ROUTE)
+            navigate(LOGIN_ROUTE);
         }
     }, [user.isAuth]);
 
     const profileClick = async () => {
-        navigate(PROFILE_ROUTE)
+        navigate(PROFILE_ROUTE);
     }
     const mainClick = async () => {
-        navigate(MAIN_ROUTE)
+        navigate(MAIN_ROUTE);
     }
     const libraryClick = async () => {
-        navigate(LIBRARY_ROUTE)
+        navigate(LIBRARY_ROUTE);
+    }
+    const podborkiClick = async () => {
+        navigate(PODBORKI_ROUTE);
     }
     return (
         <>
@@ -75,6 +78,28 @@ function MainLayout() {
                             <path d="M7.91663 11.0833H30.0833M7.91663 19H30.0833M7.91663 26.9167H30.0833" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         <h2 class="nav-title">Библиотека</h2>
+                    </div>
+                    <div onClick={() => podborkiClick()} class='main-div cursor-pointer'>
+                        <svg class="svg-sidebar" version="1.0" xmlns="http://www.w3.org/2000/svg"
+                            width="90.000000pt" height="90.000000pt" viewBox="0 0 90.000000 90.000000"
+                            preserveAspectRatio="xMidYMid meet">
+
+                            <g transform="translate(0.000000,90.000000) scale(0.100000,-0.100000)"
+                                fill="#000000" stroke="none">
+                                <path d="M80 760 c-19 -19 -20 -33 -20 -310 0 -277 1 -291 20 -310 19 -19 33
+                                        -20 370 -20 337 0 351 1 370 20 19 19 20 33 20 310 0 277 -1 291 -20 310 -19
+                                        19 -33 20 -370 20 -337 0 -351 -1 -370 -20z m130 -85 l0 -45 -45 0 -45 0 0 45
+                                        0 45 45 0 45 0 0 -45z m570 0 l0 -45 -45 0 -45 0 0 45 0 45 45 0 45 0 0 -45z
+                                        m-296 -141 c79 -45 116 -72 116 -84 0 -20 -224 -153 -249 -148 -13 3 -16 25
+                                        -19 138 -3 143 -1 160 21 160 8 0 67 -30 131 -66z m-274 -9 l0 -45 -45 0 -45
+                                        0 0 45 0 45 45 0 45 0 0 -45z m570 0 l0 -45 -45 0 -45 0 0 45 0 45 45 0 45 0
+                                        0 -45z m-570 -150 l0 -45 -45 0 -45 0 0 45 0 45 45 0 45 0 0 -45z m570 0 l0
+                                        -45 -45 0 -45 0 0 45 0 45 45 0 45 0 0 -45z m-570 -150 l0 -45 -45 0 -45 0 0
+                                        45 0 45 45 0 45 0 0 -45z m570 0 l0 -45 -45 0 -45 0 0 45 0 45 45 0 45 0 0
+                                        -45z"/>
+                            </g>
+                        </svg>
+                        <h2 class="nav-title">Подборки</h2>
                     </div>
                 </nav>
             </div>
