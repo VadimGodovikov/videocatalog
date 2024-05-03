@@ -1,0 +1,21 @@
+.notfound-main {
+    margin: auto;
+}
+
+.svg-notfound {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.title-notfound {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.text-notfound {
+    font-size: 24px;
+    font-weight: 500;
+    text-align: left;
+}

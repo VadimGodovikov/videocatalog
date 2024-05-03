@@ -27,7 +27,6 @@ const Profile = () => {
     const logout = async () => {
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
-        localStorage.removeItem('localFilmURL');
         navigate(LOGIN_ROUTE);
     }
 
