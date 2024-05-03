@@ -9,14 +9,28 @@ import ReactPlayer from 'react-player';
 const FilmPage = () => {
     const { filmId } = useParams();
     const [film, setFilmData] = useState(null);
-
-    const [folderPath, setFolderPath] = useState('');
-    const [movieName, setMovieName] = useState('');
     const [videoUrl, setVideoUrl] = useState('');
+    const [filmName, setFilmName] = useState('');
 
-    const handleWatchClick = () => {
-        const moviePath = `${folderPath}/${movieName}.mp4`;
-        setVideoUrl(moviePath);
+    const handleWatchChange = (e) => {
+        const file = e.target.files[0];
+
+        if (file.type.startsWith('video')) {
+            setVideoUrl(URL.createObjectURL(file));
+            setFilmName(file.name);
+
+            const selectedFileName = file.name; // переменная для имени выбранного фильма
+            const filmInDB = film?.Requests[0]?.FilePath; // имя фильма из базы данных
+
+            if (selectedFileName === filmInDB) {
+                setModalUpdateActive(false);
+                setModalFilmActive(true);
+            } else {
+                alert('Пожалуйста выберите нужный фильм');
+            }
+        } else {
+            alert('Пожалуйста выберите Ваш фильм');
+        }
     }
 
     const id = localStorage.getItem('userId');
@@ -36,8 +50,11 @@ const FilmPage = () => {
     }, [id, filmId]);
 
     console.log(film);
+    console.log(film?.Requests[0]?.FilePath);
+    console.log(filmName);
 
-    const [modalVideo, setModalVideoActive] = useState(false);
+    const [modalUpdateFilm, setModalUpdateActive] = useState(false);
+    const [modalFilm, setModalFilmActive] = useState(false);
     if (!film) {
         return (
             <h1>Фильм в Вашей библиотеке не найден</h1>
@@ -63,30 +80,22 @@ const FilmPage = () => {
                             </span>
                         ))}</span></p>
                         <p class="movie-year">Год: <span class="movie-ott">{film?.DataVihoda}</span></p>
-                        <Button onClick={() => setModalVideoActive(true)} size='lg' style={{ radius: 2000, backgroundColor: '#E84A5F', color: 'white', width: '100%' }} className='mt-3' variant={"outline-succes"}>
+                        <Button onClick={() => setModalUpdateActive(true)} size='lg' style={{ radius: 2000, backgroundColor: '#E84A5F', color: 'white', width: '100%' }} className='mt-3' variant={"outline-succes"}>
                             Смотреть
                         </Button>
-                        <Modal active={modalVideo} setActive={setModalVideoActive}>
+                        <Modal active={modalUpdateFilm} setActive={setModalUpdateActive}>
                             <Form>
                                 <Form.Control
-                                    type='text'
+                                    type='file'
                                     placeholder="Введите путь к папке"
                                     size='lg'
                                     className="mt-3"
-                                    onChange={(e) => setFolderPath(e.target.value)}
-                                />
-                                <Form.Control
-                                    type='text'
-                                    placeholder="Введите название фильма"
-                                    size='lg'
-                                    className="mt-3"
-                                    onChange={(e) => setMovieName(e.target.value)}
+                                    onChange={handleWatchChange}
                                 />
                             </Form>
-                            <Button onClick={handleWatchClick} size='lg' style={{ radius: 2000, backgroundColor: '#E84A5F', color: 'white', width: '100%' }} className='mt-3' variant={"outline-succes"}>
-                                Смотреть
-                            </Button>
-                            {videoUrl && <ReactPlayer url={videoUrl} controls={true} />}
+                        </Modal>
+                        <Modal active={modalFilm} setActive={setModalFilmActive}>
+                            <ReactPlayer url={videoUrl} controls={true} />
                         </Modal>
                     </div>
                 </div>

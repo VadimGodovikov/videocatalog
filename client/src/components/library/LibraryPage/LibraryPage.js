@@ -24,7 +24,7 @@ const LibraryPage = () => {
         const file = e.target.files[0];
 
         if (file.type.startsWith('video')) {
-            setLocalURL(URL.createObjectURL(file));
+            setLocalURL(file.name);
             setFileName(file.name);
             setFilmLoaded(true);
             console.log(localURL);
