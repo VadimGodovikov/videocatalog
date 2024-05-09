@@ -9,5 +9,5 @@ export const PERSON_ROUTE ='/person/:personId'
 export const FILM_ROUTE = '/film/:filmId'
 export const NOTFOUND_ROUTE = '*'
 
-export const API_KEY = '6BPY2WX-2RMM7RA-NZW601H-8CC689V'
+export const API_KEY = 'E15W6Y7-8G2M6X4-Q044VNZ-WYNC0WT'
 export const API_URL = 'https://api.kinopoisk.dev/v1.4'
