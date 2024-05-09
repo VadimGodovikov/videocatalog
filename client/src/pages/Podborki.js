@@ -2,6 +2,7 @@ import React from "react";
 import TopFamily from "../components/podborki/TopFamily/TopFamily";
 import TopTheBest from "../components/podborki/TopTheBest/TopTheBset";
 import TopHorror from "../components/podborki/TopHorror/TopHorror";
+import TopRomantic from "../components/podborki/TopRomantic/TopRomantic";
 
 const Podborki = () => {
     return (
@@ -14,6 +15,9 @@ const Podborki = () => {
             <br />
             <br />
             <TopHorror />
+            <br />
+            <br />
+            <TopRomantic />
         </div>
     );
 };
