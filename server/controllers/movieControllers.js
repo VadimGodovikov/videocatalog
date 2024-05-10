@@ -62,31 +62,36 @@ class MovieController {
         const request = await Request.create({
           ID_Usera,
           ID_Filma,
-          FilePath,
+          FilePath
         })
-
-        for (const person of persons) {
-          const existingPerson = await Person.findOne({ where: { id: person.id } });
-          let newPerson;
-
-          if (!existingPerson) {
-            newPerson = await Person.create({
-              ID_Person: person.id,
-              Name: person.name,
-              Photo: person.photo,
-              Post: person.profession
+        console.log(persons);
+        if (persons && persons.length > 0) {
+          for (let person of persons) {
+            try {
+              const { ID_Person, Name, Photo, Post } = person;
+              const existingPerson = await Person.findOne({ where: { ID_Person: persons.id } });
+              if (!existingPerson) {
+                person = await Person.create({
+                  ID_Person: persons.id,
+                  Name: persons.name,
+                  Photo: persons.photo,
+                  Post: persons.profession
+                });
+              } else {
+                person = existingPerson;
+              }
+            } catch (error) {
+              console.log(error)
+            }
+            let filmPerson;
+            filmPerson = await Film_Person.create({
+              ID_Filma,
+              ID_Person
             });
-          } else {
-            newPerson = existingPerson;
           }
-          let filmPerson;
-          filmPerson = await Film_Person.create({
-            ID_Filma: film.ID_Filma,
-            ID_Person: newPerson.ID_Person
-          });
         }
 
-        return res.json({ newPerson, filmPerson, film, zhanr, filmZhanr, country, filmCountry, request })
+        return res.json({ persons, film, zhanr, filmZhanr, country, filmCountry, request })
       } else {
         const request = await Request.create({
           ID_Usera,
