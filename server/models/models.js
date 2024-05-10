@@ -34,8 +34,7 @@ const Film_Person = sequelize.define('Film_Persons', {
 
 const Person = sequelize.define('Persons', {
     ID_Person: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    Surname: { type: DataTypes.STRING },
-    FirstName: { type: DataTypes.STRING },
+    Name: { type: DataTypes.STRING },
     Birthday: { type: DataTypes.DATE },
     Post: { type: DataTypes.STRING },
     Sex: { type: DataTypes.STRING },
@@ -87,6 +86,9 @@ Film_Country.belongsTo(Film, { foreignKey: 'ID_Filma' })
 User.hasMany(Request, { foreignKey: 'ID_Usera' })
 Request.belongsTo(User, { foreignKey: 'ID_Usera' })
 
+Film.hasMany(Request, { foreignKey: 'ID_Filma' })
+Request.belongsTo(Film, { foreignKey: 'ID_Filma' })
+
 Zhanr.hasMany(Film_Zhanr, { foreignKey: 'ID_Zhanra' })
 Film_Zhanr.belongsTo(Zhanr, { foreignKey: 'ID_Zhanra' })
 
@@ -95,9 +97,6 @@ Film_Person.belongsTo(Person, { foreignKey: 'ID_FilmMaker' })
 
 Film.hasMany(Film_Zhanr, { foreignKey: 'ID_Filma' })
 Film_Zhanr.belongsTo(Film, { foreignKey: 'ID_Filma' })
-
-Film.hasMany(Request, { foreignKey: 'ID_Filma' })
-Request.belongsTo(Film, { foreignKey: 'ID_Filma' })
 
 Film.hasMany(Film_Person, { foreignKey: 'ID_Filma' })
 Film_Person.belongsTo(Film, { foreignKey: 'ID_Filma' })

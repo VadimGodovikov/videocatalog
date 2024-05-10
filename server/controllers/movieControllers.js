@@ -14,7 +14,7 @@ const { Op } = require('sequelize');
 class MovieController {
   async createPars(req, res, next) {
     try {
-      const { ID_Usera, FilePath, ID_Filma, Name, DataVihoda, AgeRestriction, Description, Rating, Photo, nameCountry, nameZhanr } = req.body
+      const { ID_Usera, FilePath, ID_Filma, Name, DataVihoda, AgeRestriction, Description, Rating, Photo, nameCountry, nameZhanr, persons } = req.body
 
       // проверка на существование фильма
       const existingFilm = await Film.findOne({ where: { ID_Filma } })
@@ -65,7 +65,28 @@ class MovieController {
           FilePath,
         })
 
-        return res.json({ film, zhanr, filmZhanr, country, filmCountry, request })
+        for (const person of persons) {
+          const existingPerson = await Person.findOne({ where: { id: person.id } });
+          let newPerson;
+
+          if (!existingPerson) {
+            newPerson = await Person.create({
+              ID_Person: person.id,
+              Name: person.name,
+              Photo: person.photo,
+              Post: person.profession
+            });
+          } else {
+            newPerson = existingPerson;
+          }
+          let filmPerson;
+          filmPerson = await Film_Person.create({
+            ID_Filma: film.ID_Filma,
+            ID_Person: newPerson.ID_Person
+          });
+        }
+
+        return res.json({ newPerson, filmPerson, film, zhanr, filmZhanr, country, filmCountry, request })
       } else {
         const request = await Request.create({
           ID_Usera,
