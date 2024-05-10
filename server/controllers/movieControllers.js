@@ -64,30 +64,33 @@ class MovieController {
           ID_Filma,
           FilePath
         })
-        console.log(persons);
+
         if (persons && persons.length > 0) {
+          let filmPerson;
           for (let person of persons) {
             try {
               const { ID_Person, Name, Photo, Post } = person;
-              const existingPerson = await Person.findOne({ where: { ID_Person: persons.id } });
+              const existingPerson = await Person.findOne({ where: { ID_Person: person.id } });
+              
+              let newPerson;
+              
               if (!existingPerson) {
-                person = await Person.create({
-                  ID_Person: persons.id,
-                  Name: persons.name,
-                  Photo: persons.photo,
-                  Post: persons.profession
+                newPerson = await Person.create({
+                  ID_Person: person.id,
+                  Name: person.name,
+                  Photo: person.photo,
+                  Post: person.profession
                 });
               } else {
                 person = existingPerson;
               }
+              filmPerson = await Film_Person.create({
+                ID_Filma: film.ID_Filma,
+                ID_Person: newPerson.ID_Person
+              });
             } catch (error) {
               console.log(error)
             }
-            let filmPerson;
-            filmPerson = await Film_Person.create({
-              ID_Filma,
-              ID_Person
-            });
           }
         }
 

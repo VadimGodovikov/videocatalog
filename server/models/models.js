@@ -41,16 +41,6 @@ const Person = sequelize.define('Persons', {
     Photo: { type: DataTypes.STRING }
 })
 
-const Post = sequelize.define('Posts', {
-    namePost: { type: DataTypes.STRING, primaryKey: true }
-})
-
-const CareerPerson = sequelize.define('CareerPesons', {
-    ID_CareerPerson: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    ID_Person: { type: DataTypes.INTEGER },
-    namePost: { type: DataTypes.STRING }
-})
-
 const Film = sequelize.define('Films', {
     ID_Filma: { type: DataTypes.INTEGER, primaryKey: true },
     Name: { type: DataTypes.STRING },
@@ -70,12 +60,6 @@ const Film_Country = sequelize.define('Film_Countries', {
     ID_Filma: { type: DataTypes.INTEGER },
     nameCountry: { type: DataTypes.STRING }
 })
-
-Post.hasMany(CareerPerson, { foreignKey: 'namePost' })
-CareerPerson.belongsTo(Post, { foreignKey: 'namePost' })
-
-Person.hasMany(CareerPerson, { foreignKey: 'ID_Person' })
-CareerPerson.belongsTo(Person, { foreignKey: 'ID_Person' })
 
 Country.hasMany(Film_Country, { foreignKey: 'nameCountry' })
 Film_Country.belongsTo(Country, { foreignKey: 'nameCountry' })
@@ -110,7 +94,5 @@ module.exports = {
     Film_Person,
     Person,
     Country,
-    Film_Country,
-    Post,
-    CareerPerson
+    Film_Country
 }
