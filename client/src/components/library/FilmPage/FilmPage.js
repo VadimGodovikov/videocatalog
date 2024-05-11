@@ -5,6 +5,7 @@ import shablonphoto from '../../img/shablonphoto.png'
 import Modal from "../Modal/Modal";
 import { Form, Button } from "react-bootstrap";
 import ReactPlayer from 'react-player';
+import ActorsSlider from "../../actor/ActorsSlider/ActorsSlider";
 
 const FilmPage = () => {
     const { filmId } = useParams();
@@ -34,6 +35,7 @@ const FilmPage = () => {
     }
 
     const id = localStorage.getItem('userId');
+    const [persons, setPersons] = useState([]);
     useEffect(() => {
         const fetchFilm = async () => {
             try {
@@ -45,10 +47,19 @@ const FilmPage = () => {
                 console.error(error);
             }
         };
-
+        const fecthPersons = async () => {
+            try {
+                const personData = await axios.get(`http://localhost:5000/api/person/persons/${filmId}`);
+                setPersons(personData.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
         fetchFilm();
+        fecthPersons();
     }, [id, filmId]);
 
+    console.log(persons);
     console.log(film);
     console.log(film?.Requests[0]?.FilePath);
     console.log(filmName);
@@ -98,6 +109,9 @@ const FilmPage = () => {
                             <ReactPlayer url={videoUrl} controls={true} />
                         </Modal>
                     </div>
+                </div>
+                <div class="persons-slider" >
+                    <ActorsSlider persons={persons} key={persons.ID_Person} />
                 </div>
             </div>
         );

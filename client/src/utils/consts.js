@@ -7,6 +7,7 @@ export const PROFILE_ROUTE = '/profile'
 export const PODBORKI_ROUTE = '/podborki'
 export const PERSON_ROUTE ='/person/:personId'
 export const FILM_ROUTE = '/film/:filmId'
+export const ACTORS_ROUTE = '/actor/:actorId'
 export const NOTFOUND_ROUTE = '*'
 
 export const API_KEY = '6BPY2WX-2RMM7RA-NZW601H-8CC689V'

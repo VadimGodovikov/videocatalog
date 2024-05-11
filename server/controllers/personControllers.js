@@ -76,7 +76,8 @@ class PersonController {
                 }, {
                     model: Request,
                     where: { ID_Usera: userId }
-                }]
+                }],
+                order: [['Rating', 'DESC']]
             });
             res.json(films);
         } catch (error) {

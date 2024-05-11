@@ -10,7 +10,8 @@ import Film from "./pages/Film";
 import MainLayout from "./components/MainLayout";
 import Podborki from "./pages/Podborki";
 import NotFound from "./pages/NotFound";
-import { LIBRARY_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, MOVIE_ROUTE, PERSON_ROUTE, FILM_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE, PODBORKI_ROUTE, NOTFOUND_ROUTE } from "./utils/consts";
+import Actor from "./pages/Actor"
+import { LIBRARY_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, MOVIE_ROUTE, PERSON_ROUTE, FILM_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE, PODBORKI_ROUTE, ACTORS_ROUTE, NOTFOUND_ROUTE } from "./utils/consts";
 
 const router = createBrowserRouter([
  {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: FILM_ROUTE,
         element: <Film/>
+      },
+      {
+        path: ACTORS_ROUTE,
+        element: <Actor/>
       }
    ]
  },

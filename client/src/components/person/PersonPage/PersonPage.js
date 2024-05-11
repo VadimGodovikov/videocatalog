@@ -47,12 +47,17 @@ const PersonPage = () => {
                 <img class="person-photo" src={person.photo || shablonphoto} alt={person.name || person.enName} />
                 <div class="person-options">
                     <p class="person-name">{person.name || person.enName}</p>
-                    <p class="person-options-info">Карьера: <span class="person-ott">{person?.profession?.map((prof, index) => (
-                        <span key={prof.value}>
-                            {prof.value}
-                            {index !== person.profession.length - 1 && <>,&nbsp;&nbsp;</>}
-                        </span>
-                    ))}</span></p>
+                    <p className="person-options-info">Карьера: <span className="person-ott">
+                        {person?.profession?.map((prof, index) => {
+                            return (
+                                <span key={prof.value}>
+                                    {prof.value}
+                                    {index !== person?.profession?.length - 1 && ", "}
+                                </span>
+                            );
+                        })}
+                        {person?.profession?.length === 0 && "Неизвестно"}
+                    </span></p>
                     <p class="person-options-info">Дата рождения: <span class="person-ott">{new Date(person.birthday).toLocaleDateString()}</span></p>
                     <p class="person-options-info">Место рождения: <span class="person-ott">{person?.birthPlace?.map((b, index) => (
                         <span key={b.value}>
