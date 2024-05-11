@@ -66,9 +66,9 @@ class MovieController {
         })
 
         if (persons && persons.length > 0) {
-          let filmPerson;
           for (let person of persons) {
             try {
+              let filmPerson;
               const { ID_Person, Name, Photo, Post } = person;
               const existingPerson = await Person.findOne({ where: { ID_Person: person.id } });
               
@@ -82,7 +82,7 @@ class MovieController {
                   Post: person.profession
                 });
               } else {
-                person = existingPerson;
+                newPerson = existingPerson;
               }
               filmPerson = await Film_Person.create({
                 ID_Filma: film.ID_Filma,
@@ -164,7 +164,8 @@ class MovieController {
         include: [
           { model: Film_Zhanr, include: [{ model: Zhanr }] },
           { model: Film_Country, include: [{ model: Country }] },
-          { model: Request, where: { ID_Usera: userId } }]
+          { model: Request, where: { ID_Usera: userId } }
+        ]
       });
       res.json(film);
     } catch (error) {

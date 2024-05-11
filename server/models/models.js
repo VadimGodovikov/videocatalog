@@ -76,14 +76,14 @@ Request.belongsTo(Film, { foreignKey: 'ID_Filma' })
 Zhanr.hasMany(Film_Zhanr, { foreignKey: 'ID_Zhanra' })
 Film_Zhanr.belongsTo(Zhanr, { foreignKey: 'ID_Zhanra' })
 
-Person.hasMany(Film_Person, { foreignKey: 'ID_FilmMaker' })
-Film_Person.belongsTo(Person, { foreignKey: 'ID_FilmMaker' })
-
 Film.hasMany(Film_Zhanr, { foreignKey: 'ID_Filma' })
 Film_Zhanr.belongsTo(Film, { foreignKey: 'ID_Filma' })
 
-Film.hasMany(Film_Person, { foreignKey: 'ID_Filma' })
-Film_Person.belongsTo(Film, { foreignKey: 'ID_Filma' })
+Person.belongsToMany(Film, { through: Film_Person, foreignKey: 'ID_Person' });
+Film.belongsToMany(Person, { through: Film_Person, foreignKey: 'ID_Filma' });
+
+Film.hasMany(Film_Person, { foreignKey: 'ID_Filma' });
+Film_Person.belongsTo(Film, { foreignKey: 'ID_Filma' });
 
 module.exports = {
     User,
