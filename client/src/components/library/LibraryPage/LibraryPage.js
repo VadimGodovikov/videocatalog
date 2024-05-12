@@ -70,7 +70,7 @@ const LibraryPage = () => {
     useEffect(() => {  // парсер с сервера фильмов
         const fetchFilm = async () => {
             try {
-                const filmData = await axios.get(`http://localhost:5000/api/movie/films/${id}?name=${filtrName || ''}&year=${filtrYear || ''}&rating=${filtrRating || ''}&zhanr=${filtrZhanr || ''}&country=${filtrCountry || ''}`);
+                const filmData = await axios.get(`http://localhost:5000/api/movie/films/${id}?name=${filtrName || ''}&year=${filtrYear || ''}&rating=${filtrRating || 0}&zhanr=${filtrZhanr || ''}&country=${filtrCountry || ''}`);
 
                 setFilmData(filmData.data);
 
@@ -175,7 +175,7 @@ const LibraryPage = () => {
                         }} />
 
                         <input className="sort-menu-items" type="number" id="rating" min="0" max="10" step="0.1" placeholder="Рейтинг от 0 до 10" style={{ width: 180 }} onChange={(e) => {
-                            const value = parseFloat(e.target.value);
+                            const value = parseFloat(e.target.value || 0);
                             if (value >= 0 && value <= 10) { setFiltrRating(value); }
                         }} />
                     </form>
