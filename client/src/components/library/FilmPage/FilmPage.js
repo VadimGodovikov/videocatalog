@@ -96,9 +96,13 @@ const FilmPage = () => {
                         </Button>
                         <Modal active={modalUpdateFilm} setActive={setModalUpdateActive}>
                             <Form>
+                                <h6>Чтобы посмотреть фильм, нужно загрузить именно тот фильм, который вы загружали!
+                                    <br />
+                                    Название файла фильма, который был загружен для этого фильма: {film?.Requests[0]?.FilePath}
+                                </h6>
                                 <Form.Control
                                     type='file'
-                                    placeholder="Введите путь к папке"
+                                    placeholder="Выберите файл"
                                     size='lg'
                                     className="mt-3"
                                     onChange={handleWatchChange}
